@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Automation Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="header-content">
+                <h1><i class="fas fa-magic header-icon"></i> Automation Demo</h1>
+                <p class="subtitle">Upload a PDF and automate your teaching tasks with AI</p>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <div class="container">
+                <!-- PDF Upload Section -->
+                <section class="pdf-upload">
+                    <h2><i class="fas fa-file-pdf icon"></i> Upload PDF Document</h2>
+                    <div class="upload-container">
+                        <input type="file" id="pdf-input" accept="application/pdf" class="file-input">
+                        
+                        <div id="file-info" class="file-info hidden">
+                            <span class="file-icon"><i class="fas fa-file-pdf"></i></span>
+                            <span id="file-name" class="file-name"></span>
+                            <span id="file-size" class="file-size"></span>
+                        </div>
+                        
+                        <button id="upload-btn" class="upload-btn" disabled>
+                            <i class="fas fa-cloud-upload-alt icon"></i> Upload & Process
+                        </button>
+
+                        <div id="upload-error" class="error-message hidden"></div>
+                        <div id="upload-success" class="success-message hidden">
+                            <i class="fas fa-check-circle icon"></i> PDF Processed Successfully!
+                            <div id="pdf-details" style="margin-top: 10px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Automation Section -->
+                <section class="automation-section">
+                    <h2><i class="fas fa-cogs icon"></i> Automation Tools</h2>
+                    <div class="automation-grid">
+                        <p id="automation-info" class="info-message">
+                            <i class="fas fa-info-circle icon"></i> Please upload a PDF document first to enable automation tools
+                        </p>
+                        
+                        <div class="button-group">
+                            <button id="mcq-btn" class="action-btn" disabled>
+                                <i class="fas fa-tasks icon"></i> Generate MCQs from lesson
+                            </button>
+                            <button id="summary-btn" class="action-btn" disabled>
+                                <i class="fas fa-align-left icon"></i> Summarize lecture
+                            </button>
+                            <button id="rubric-btn" class="action-btn" disabled>
+                                <i class="fas fa-table icon"></i> Create assignment rubric
+                            </button>
+                        </div>
+
+                        <div id="action-error" class="error-message hidden"></div>
+                    </div>
+
+                    <!-- Result Display -->
+                    <div id="result-container" class="result-container hidden">
+                        <div class="result-header">
+                            <h3 id="result-title">Result</h3>
+                            <button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <div class="result-content" id="result-content"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>Powered by <strong>Udayam AI Labs • Automation Demo</strong></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
