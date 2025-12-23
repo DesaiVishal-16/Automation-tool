@@ -188,7 +188,11 @@ app.post('/mcq', async (req, res) => {
       return res.status(400).json({ error: 'Assistant not ready. Please upload a PDF first.' });
     }
 
+    const language = req.body.language || 'english';
+    
     const prompt = `Based on the uploaded document, generate exactly 5 high-quality Multiple Choice Questions (MCQs). 
+    
+    IMPORTANT: The output MUST be in ${language} language.
     
     For each question:
     1. Provide 4 distinct options (A, B, C, D).
@@ -223,7 +227,11 @@ app.post('/summary', async (req, res) => {
       return res.status(400).json({ error: 'Assistant not ready. Please upload a PDF first.' });
     }
 
-    const prompt = "Provide a comprehensive summary of the uploaded document. Highlight the key concepts, main arguments, and important takeaways. Use bullet points for readability.";
+    const language = req.body.language || 'english';
+    
+    const prompt = `Provide a comprehensive summary of the uploaded document. Highlight the key concepts, main arguments, and important takeaways. Use bullet points for readability.
+    
+    IMPORTANT: The output MUST be in ${language} language.`;
     console.log('[Automation] Generating Summary...');
     const result = await askAssistant(prompt);
     res.json({ success: true, answer: result.answer });
@@ -243,7 +251,11 @@ app.post('/rubric', async (req, res) => {
       return res.status(400).json({ error: 'Assistant not ready. Please upload a PDF first.' });
     }
 
-    const prompt = "Based on the content of the uploaded document, create a detailed assignment rubric. Include criteria, levels of achievement (e.g., Excellent, Good, Fair, Poor), and point values. Format it as a clear table or structured list.";
+    const language = req.body.language || 'english';
+    
+    const prompt = `Based on the content of the uploaded document, create a detailed assignment rubric. Include criteria, levels of achievement (e.g., Excellent, Good, Fair, Poor), and point values. Format it as a clear table or structured list.
+    
+    IMPORTANT: The output MUST be in ${language} language.`;
     console.log('[Automation] Generating Rubric...');
     const result = await askAssistant(prompt);
     res.json({ success: true, answer: result.answer });
