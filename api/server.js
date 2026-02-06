@@ -69,39 +69,6 @@ if (!OPENAI_API_KEY) {
 initializeAssistants(OPENAI_API_KEY);
 console.log('✓ OpenAI Assistants API initialized');
 
-// Basic Authentication Middleware
-const basicAuth = (req, res, next) => {
-  // Skip authentication for API endpoints
-  const publicPaths = ['/health', '/upload-pdf', '/mcq', '/summary', '/rubric', '/current-pdf'];
-  if (publicPaths.includes(req.path)) {
-    return next();
-  }
-
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');
-    return res.status(401).send('Authentication required');
-  }
-
-  const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-  const user = auth[0];
-  const pass = auth[1];
-
-  const envUser = process.env.ADMIN_USERNAME || 'admin';
-  const envPass = process.env.ADMIN_PASSWORD || 'admin4321';
-
-  if (user === envUser && pass === envPass) {
-    next();
-  } else {
-    res.setHeader('WWW-Authenticate', 'Basic realm="Secure Area"');
-    return res.status(401).send('Authentication required');
-  }
-};
-
-// Apply Basic Auth to all routes
-app.use(basicAuth);
-
 // Store current PDF info
 let currentPDFInfo = null;
 
